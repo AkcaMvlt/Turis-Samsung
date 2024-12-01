@@ -1,46 +1,38 @@
-"use strict";
-function r(f){/in/.test(document.readyState)?setTimeout('r('+f+')',9):f()}
-r(function(){
-    if(!document.getElementsByClassName) {
-        // IE8 support
-        var getElementsByClassName = function(node, classname) {
-            var a = [];
-            var re = new RegExp('(^| )'+classname+'( |$)');
-            var els = node.getElementsByTagName("*");
-            for(var i=0,j=els.length; i<j; i++)
-                if(re.test(els[i].className))a.push(els[i]);
-            return a;
-        }
-        var videos = getElementsByClassName(document.body,"youtube");
-    }
-    else {
-        var videos = document.getElementsByClassName("youtube");
-    }
-
-    var nb_videos = videos.length;
-    for (var i=0; i<nb_videos; i++) {
-        // Based on the YouTube ID, we can easily find the thumbnail image
-        videos[i].style.backgroundImage = 'url(http://i.ytimg.com/vi/' + videos[i].id + '/sddefault.jpg)';
-
-        // Overlay the Play icon to make it look like a video player
-        var play = document.createElement("div");
-        play.setAttribute("class","play");
-        videos[i].appendChild(play);
-
-        videos[i].onclick = function() {
-            // Create an iFrame with autoplay set to true
-            var iframe = document.createElement("iframe");
-            var iframe_url = "https://www.youtube.com/embed/" + this.id + "?autoplay=1&autohide=1";
-            if (this.getAttribute("data-params")) iframe_url+='&'+this.getAttribute("data-params");
-            iframe.setAttribute("src",iframe_url);
-            iframe.setAttribute("frameborder",'0');
-
-            // The height and width of the iFrame should be the same as parent
-            iframe.style.width  = this.style.width;
-            iframe.style.height = this.style.height;
-
-            // Replace the YouTube thumbnail with YouTube Player
-            this.parentNode.replaceChild(iframe, this);
-        }
-    }
-});
+//<![CDATA[
+function labnolIframe(div) {
+  var iframe = document.createElement("iframe");
+  iframe.setAttribute(
+    "src",
+    "https://www.youtube.com/embed/" + div.dataset.id + "?autoplay=1&rel=0"
+  );
+  iframe.setAttribute("frameborder", "0");
+  iframe.setAttribute("allowfullscreen", "1");
+  iframe.setAttribute(
+    "allow",
+    "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  );
+  div.parentNode.replaceChild(iframe, div);
+}
+function initYouTubeVideos() {
+  var playerElements = document.getElementsByClassName("youtube-player");
+  for (var n = 0; n < playerElements.length; n++) {
+    var videoId = playerElements[n].dataset.id;
+    var div = document.createElement("div");
+    div.setAttribute("data-id", videoId);
+    var thumbNode = document.createElement("img");
+    thumbNode.src = "https://i.ytimg.com/vi_webp/ID/hqdefault.webp".replace(
+      "ID",
+      videoId
+    );
+    div.appendChild(thumbNode);
+    var playButton = document.createElement("div");
+    playButton.setAttribute("class", "play");
+    div.appendChild(playButton);
+    div.onclick = function () {
+      labnolIframe(this);
+    };
+    playerElements[n].appendChild(div);
+  }
+}
+document.addEventListener("DOMContentLoaded", initYouTubeVideos);
+//]]>
