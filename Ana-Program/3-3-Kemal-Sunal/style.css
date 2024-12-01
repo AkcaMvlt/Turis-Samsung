@@ -1,0 +1,142 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white;
+  color: black;
+  font-size: 62.5%;
+  line-height: 1.6;
+  font-family: "Gelasio", serif;
+  /* prevent ie from showing the horizontal scrollbar */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: white;
+  transition: all 0.3s;
+}
+a:hover {
+  color: #ff0000;
+  padding-left: 5px;
+}
+
+.page-intro {
+  background-image: url("https://source.unsplash.com/kGgsoEU4EIw/1600x1200");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.content-area {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 40px 20px;
+}
+.content-area h2 {
+  font-size: 3em;
+}
+.content-area h2 span {
+  color: #ff0000;
+}
+.content-area h3 {
+  font-size: 2.2em;
+}
+.content-area p {
+  font-size: 1.7em;
+  line-height: 0.8;
+  padding: 0;
+}
+.content-area #playBtn i {
+  color: #ff0000;
+  display: block;
+  font-size: 4em;
+  padding: 40px;
+  transition: all 0.3s;
+}
+.content-area #playBtn i:hover {
+  color: white;
+  cursor: pointer;
+}
+
+/* Make Video Responsive */
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+/* The Modal */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  padding-top: 100px;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Black w/ opacity */
+}
+.modal .modal-content {
+  background-color: white;
+  margin: auto;
+  padding: 0;
+  position: relative;
+  border: 3px solid white;
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Close Button */
+.close {
+  background-color: #ff0000;
+  color: black;
+  right: -48px;
+  top: -3px;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  padding: 0px 12px;
+  transition: all 0.3s;
+}
+.close:hover, .close:focus {
+  background-color: white;
+  color: #ff0000;
+  text-decoration: none;
+  cursor: pointer !important;
+}
