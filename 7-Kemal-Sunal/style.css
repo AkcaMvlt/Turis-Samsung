@@ -1,0 +1,153 @@
+:root{
+  --background-color: #000;
+  --forground-color: #fff;
+  --font-family: 'Lucida Sans', Arial, Helvetica;
+  --font-size: 1rem;
+  --parent-width: 80vw;
+  --seek-height: 30px;
+  --uniform-radius: 0px;
+}
+
+*{
+  -webkit-appearance: none;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  padding-top: 10vh;
+}
+
+/* States */
+.media-controller .hidden { display: none; }
+
+/* Defaults */
+#player,
+#controller {
+  width : var(--parent-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Player */
+.media-embed {
+  background-color: var(--background-color);
+  height: 70vh;
+  left: calc(50% - var(--parent-width)/2);
+}
+
+/* Controller */
+.media-controller {
+  background-color: var(--forground-color);
+  height: 10vh;
+  border-radius: var(--uniform-radius);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.media-controller > * {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* buttons */
+.media-controller button {
+  background: transparent;
+  border: none;
+  font-size: calc(var(--font-size)*1.5);
+  color: var(--background-color);
+}
+
+.media-controller button:focus { outline: none; }
+.media-controller button:hover {
+  color: var(--background-color);
+  opacity: .8;
+}
+
+/* play and pause buttons */
+.media-controller .play,
+.media-controller .pause,
+.media-controller .volume {
+  font-size: 2.25rem;
+}
+
+.media-controller .time {
+  font-weight: 900;
+  color: var(--background-color);
+  font-size: 1.25rem;
+}
+
+/* seek bar progress */
+.media-controller .seek {
+  height: var(--seek-height);
+  width: calc(var(--parent-width)/1.66);
+  position: relative;
+}
+.media-controller .seek progress {
+  height: var(--seek-height);
+  width: calc(var(--parent-width)/1.66);
+}
+.media-controller .seek progress::-webkit-progress-bar {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  background-color: var(--background-color);
+  border-radius: var(--uniform-radius);
+  padding: calc(var(--seek-height)/6);
+}
+.media-controller .seek progress::-webkit-progress-value {
+  -webkit-transition: all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
+  background-color: var(--forground-color);
+  border-radius: var(--uniform-radius);
+  height: calc(var(--seek-height)/2 + var(--seek-height)/6);
+}
+
+/* seek bar range */
+.media-controller .seek input[type=range],
+.media-controller .seek .seek-range {
+  height: var(--seek-height);
+  width: calc(var(--parent-width)/1.66);
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.media-controller .seek input[type=range]:focus,
+.media-controller .seek .seek-range:focus {
+  outline: none;
+}
+.media-controller .seek input[type=range]::-webkit-slider-thumb,
+.media-controller .seek .seek-range::-webkit-slider-thumb {
+  opacity: 0;
+}
+.media-controller .seek input[type=range]:hover ~ progress::-webkit-progress-value,
+.media-controller .seek .seek-range:hover ~ progress::-webkit-progress-value {
+  background-color: var(--forground-color);
+}
+.media-controller .seek input[type=range]:hover ~ progress::-webkit-progress-bar,
+.media-controller .seek .seek-range:hover ~ progress::-webkit-progress-bar {
+  background-color: var(--background-color);
+}
+
+@media (max-width: 1000px) {
+  .media-controller .time {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .media-controller .backward {
+    display: none;
+  }
+
+  .media-embed{
+    height: 30vh;
+  }
+}
